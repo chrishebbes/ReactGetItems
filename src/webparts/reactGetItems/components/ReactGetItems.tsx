@@ -53,7 +53,7 @@ export default class ReactGetItems extends React.Component<IReactGetItemsProps, 
 <br></br>
 <div className={styles.tableCaptionStyle}>Demo: Retrieve SharePoint List Items Using SPFx, REST API and React JS</div>
 <br></br>
-<div>${this.props.username}</div>
+<div>{this.props.username}</div>
 <div className={styles.headerCaptionStyle}>Employee Details</div>
 <div className={styles.tableStyle}>
   <div className={styles.headerStyle}>
