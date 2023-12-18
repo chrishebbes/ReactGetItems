@@ -3,7 +3,7 @@
   "solution": {
     "name": "react-get-items-client-side-solution",
     "id": "c09e54c6-cf4c-4925-ac5a-52eb83f6f5fe",
-    "version": "1.0.0.3",
+    "version": "2.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -30,7 +30,7 @@
         "title": "react-get-items Feature",
         "description": "The feature that activates elements of the react-get-items solution.",
         "id": "557388e1-40fd-4131-9243-994a16d13fb4",
-        "version": "1.0.0.3"
+        "version": "2.0.0.0"
       }
     ]
   },
