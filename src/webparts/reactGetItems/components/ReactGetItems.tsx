@@ -43,17 +43,22 @@ export default class ReactGetItems extends React.Component<IReactGetItemsProps, 
                     error: function(jqXHR, textStatus, errorThrown) {
                 }
                 });
+  
     }
 
-  
+    public buttonClicked () {
+      this.render();
+  }
+
   public render(): React.ReactElement<IReactGetItemsProps> {
     return (
  <div className={styles.panelStyle}>
 <br></br>
 <br></br>
 <div className={styles.tableCaptionStyle}>Demo: Retrieve SharePoint List Items Using SPFx, REST API and React JS</div>
-<br></br>
-<div>{this.props.username}</div>
+<br></br><div>
+        <button onClick={() => this.buttonClicked()}>Refresh</button>
+    </div>
 <div className={styles.headerCaptionStyle}>Employee Details</div>
 <div className={styles.tableStyle}>
   <div className={styles.headerStyle}>
