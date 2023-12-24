@@ -2,6 +2,7 @@ import * as React from 'react';
 import styles from './ReactGetItems.module.scss';
 import type { IReactGetItemsProps } from './IReactGetItemsProps';
 import * as jquery from 'jquery';
+import { ActionButton} from 'office-ui-fabric-react';
 
 export interface IReactGetItemsState{
   items: [
@@ -29,26 +30,35 @@ export default class ReactGetItems extends React.Component<IReactGetItemsProps, 
       };
     }
 
+    public loadData(){
+      var reactHandler = this;
+      jquery.ajax({
+        url: `${this.props.siteurl}/_api/web/lists/getbytitle('EmployeeList')/items`,
+        type: "GET",
+        headers:{'Accept':'application/json; odata=verbose;'},
+        success: function(resultData){
+            reactHandler.setState({
+                items: resultData.d.results
+              });
+            },
+                error: function(jqXHR, textStatus, errorThrown) {
+            }
+            });
+    }
+
     public componentDidMount(){
-        var reactHandler = this;
-        jquery.ajax({
-            url: `${this.props.siteurl}/_api/web/lists/getbytitle('EmployeeList')/items`,
-            type: "GET",
-            headers:{'Accept':'application/json; odata=verbose;'},
-            success: function(resultData){
-                reactHandler.setState({
-                    items: resultData.d.results
-                  });
-                },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                }
-                });
-  
+   this.loadData();
+   setInterval(this.loadData,180000);
     }
 
     public buttonClicked () {
+      this.loadData();
       this.render();
   }
+
+  public addButtonClicked () {
+    
+}
 
   public render(): React.ReactElement<IReactGetItemsProps> {
     return (
@@ -57,7 +67,7 @@ export default class ReactGetItems extends React.Component<IReactGetItemsProps, 
 <br></br>
 <div className={styles.tableCaptionStyle}>Demo: Retrieve SharePoint List Items Using SPFx, REST API and React JS</div>
 <br></br><div>
-        <button onClick={() => this.buttonClicked()}>Refresh</button>
+        <ActionButton iconProps={{ iconName: 'refresh' }} onClick={() => this.buttonClicked()}>Refresh</ActionButton><ActionButton iconProps={{ iconName: 'circleplus' }} onClick={() => this.addButtonClicked()}>Add</ActionButton>
     </div>
 <div className={styles.headerCaptionStyle}>Employee Details</div>
 <div className={styles.tableStyle}>
@@ -77,6 +87,7 @@ export default class ReactGetItems extends React.Component<IReactGetItemsProps, 
   })}
   </div>
   </div>
+  
 );
 }
 }
